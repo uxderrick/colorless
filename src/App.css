@@ -19,6 +19,7 @@
   /* border: 1px solid #ccc; */
   padding: 10px;
   text-align: center;
+  touch-action: "manipulation";
 }
 
 .grey-text {
