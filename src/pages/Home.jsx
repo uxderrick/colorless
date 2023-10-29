@@ -37,7 +37,7 @@ const Home = () => {
             >
               <TextFieldRoot className="input">
                 <TextField.Input
-                  placeholder="Enter your color code"
+                  placeholder="Enter your color code without #"
                   // defaultValue="#ff0000"
                   style={{ width: "100%" }}
                 />
