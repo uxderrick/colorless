@@ -4,6 +4,10 @@ import "@radix-ui/themes/styles.css";
 import ColorCode from "../component/ColorCode";
 
 const Home = () => {
+  const openDerrickURL = () => {
+    window.open("https://twitter.com/uxderrick");
+  };
+
   return (
     <>
       <div className="between">
@@ -82,7 +86,7 @@ const Home = () => {
           <Text align="center" className="no-bg">
             Built by
           </Text>
-          <Text align="center" className="no-bg link" onClick="">
+          <Text align="center" className="no-bg link" onClick={openDerrickURL}>
             UXDerrick
           </Text>
         </Flex>

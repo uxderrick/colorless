@@ -44,6 +44,7 @@
 .link {
   color: #299764;
   text-decoration: underline;
+  cursor: pointer;
 }
 
 .box {
