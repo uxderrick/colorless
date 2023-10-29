@@ -37,7 +37,13 @@ const Home = () => {
             </Flex>
 
             {/* Result area */}
-            <Flex direction="row" wrap="wrap" gap="5" justify="center">
+            <Flex
+              direction="row"
+              wrap="wrap"
+              gap="5"
+              justify="center"
+              py={{ sm: "3", md: "5", lg: "5" }}
+            >
               <ColorCode></ColorCode>
               <ColorCode></ColorCode>
               <ColorCode></ColorCode>
@@ -62,6 +68,8 @@ const Home = () => {
               <Text align="center" className="grey-text">
                 No colors inputed yet
               </Text>
+
+              {/*  */}
             </Flex>
           </Flex>
         </Flex>
