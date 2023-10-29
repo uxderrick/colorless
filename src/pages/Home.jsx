@@ -16,7 +16,10 @@ const Home = () => {
             className="space"
           >
             <Flex direction="column" justify="center" align="center" gap="3">
-              <img src="src/assets/COLORLESS.svg" alt="logo" />
+              <img
+                src="https://raw.githubusercontent.com/uxderrick/colorless/7adc4ec62eccd91aeddae753469b6327c26f46b9/src/assets/COLORLESS.svg"
+                alt="logo"
+              />
               <Text align="center">
                 Enter your color Hex code and get its tints and shades
               </Text>
@@ -61,7 +64,7 @@ const Home = () => {
               py="6"
             >
               <img
-                src="src/assets/Color Palette 1.png"
+                src="https://github.com/uxderrick/colorless/blob/main/src/assets/Color%20Palette%201.png?raw=true"
                 alt="logo"
                 height="80px"
               />
