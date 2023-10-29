@@ -2,6 +2,7 @@ import React from "react";
 import { Text, Flex, Box, TextField, TextFieldRoot } from "@radix-ui/themes";
 import "@radix-ui/themes/styles.css";
 import ColorCode from "../component/ColorCode";
+import { Analytics } from "@vercel/analytics/react";
 
 const Home = () => {
   const openDerrickURL = () => {
@@ -91,6 +92,7 @@ const Home = () => {
           </Text>
         </Flex>
       </div>
+      <Analytics />
     </>
   );
 };
