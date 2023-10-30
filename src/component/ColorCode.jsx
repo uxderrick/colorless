@@ -1,7 +1,7 @@
 import React from "react";
 import { Flex, Text } from "@radix-ui/themes";
 
-const color = "#ffffff";
+const color = "hsl(360, 100%, 100%)";
 
 const ColorCode = () => {
   return (
