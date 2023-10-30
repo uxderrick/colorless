@@ -37,9 +37,14 @@ const Home = () => {
             >
               <TextFieldRoot className="input">
                 <TextField.Input
-                  placeholder="Enter your color code without #"
+                  placeholder="Enter your color code"
                   // defaultValue="#ff0000"
                   style={{ width: "100%" }}
+                  maxLength={6}
+                  //remove # from input
+                  onChange={(e) => {
+                    e.target.value = e.target.value.replace("#", "");
+                  }}
                 />
               </TextFieldRoot>
             </Flex>
