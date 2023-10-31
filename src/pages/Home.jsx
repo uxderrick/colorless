@@ -1,14 +1,76 @@
-import React from "react";
-import { Text, Flex, Box, TextField, TextFieldRoot } from "@radix-ui/themes";
+import React, { useEffect, useState } from "react";
+import {
+  Text,
+  Flex,
+  Box,
+  TextField,
+  TextFieldRoot,
+  TextFieldSlot,
+} from "@radix-ui/themes";
+
+import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import "@radix-ui/themes/styles.css";
-import ColorCode from "../component/ColorCode";
-import { Analytics } from "@vercel/analytics/react";
+import Result from "../component/Result";
+import EmptyState from "../component/EmptyState";
+import axios from "axios";
 
 const Home = () => {
+  const [colorData, setColorData] = useState(null);
+  const [colorInput, setColorInput] = useState("");
+  const [hsl, setHsl] = useState("");
+  const [preview, setPreview] = useState("");
+  const [lightness, setLightness] = useState(0);
+  const [searchClicked, setSearchClicked] = useState(false);
+
   const openDerrickURL = () => {
     window.open("https://twitter.com/uxderrick");
   };
 
+  // Get data from API
+  const fetchData = async () => {
+    if (colorInput.length === 6) {
+      setSearchClicked(true);
+
+      axios
+        .get(`https://www.thecolorapi.com/id?hex=${colorInput}&format=json`)
+        .then((response) => {
+          setColorData(response?.data);
+          setHsl(
+            response?.data?.hsl?.value
+              .replace("hsl(", "")
+              .replace(")", "")
+              .replace(" ", "")
+              .replace(" ", "")
+          );
+          setPreview(response?.data?.image?.bare);
+          setLightness(response?.data?.hsl?.l);
+          // setSearchClicked(false);
+        })
+        .catch((err) => {
+          console.error("API request failed:", err);
+        });
+    }
+  };
+
+  const handleSearchClick = () => {
+    if (colorInput.length === 6) {
+      fetchData();
+    }
+  };
+
+  const handleInputChange = (e) => {
+    const newValue = e.target.value.replace("#", "").replace(" ", "");
+    setColorInput(newValue);
+    setSearchClicked(false);
+
+    // Reset the color data if the input is changed and Search hasn't been clicked
+    if (searchClicked) {
+      setColorData(null);
+    }
+  };
+
+  //
+  // This is the UI for the home page
   return (
     <>
       <div className="between">
@@ -35,55 +97,39 @@ const Home = () => {
               align="center"
               className="input"
             >
+              {/* Search field */}
               <TextFieldRoot className="input">
+                {/* Label */}
                 <TextField.Input
                   placeholder="Enter your color code"
-                  // defaultValue="#ff0000"
+                  defaultValue={colorInput}
                   style={{ width: "100%" }}
                   maxLength={6}
-                  //remove # from input
-                  onChange={(e) => {
-                    e.target.value = e.target.value.replace("#", "");
-                  }}
+                  onChange={handleInputChange}
                 />
+                <TextField.Slot
+                  className="mouse-hand"
+                  onClick={handleSearchClick}
+                >
+                  <MagnifyingGlassIcon height="16" width="16" />
+                </TextField.Slot>
               </TextFieldRoot>
             </Flex>
 
             {/* Result area */}
-            <Flex
-              direction="row"
-              wrap="wrap"
-              gap="5"
-              justify="center"
-              py={{ sm: "3", md: "5", lg: "5" }}
-            >
-              <ColorCode></ColorCode>
-              <ColorCode></ColorCode>
-              <ColorCode></ColorCode>
-              <ColorCode></ColorCode>
-              <ColorCode></ColorCode>
-              <ColorCode></ColorCode>
-            </Flex>
 
-            {/* Empty State */}
-            <Flex
-              direction="column"
-              justify="center"
-              align="center"
-              gap="3"
-              py="6"
-            >
-              <img
-                src="https://github.com/uxderrick/colorless/blob/main/src/assets/Color%20Palette%201.png?raw=true"
-                alt="logo"
-                height="80px"
-              />
-              <Text align="center" className="grey-text">
-                No colors inputed yet
-              </Text>
+            {colorData && searchClicked ? (
+              <Result
+                colorData={colorData}
+                hsl={hsl}
+                colorInput={colorInput}
+                lightness={lightness}
+              ></Result>
+            ) : (
+              <EmptyState></EmptyState>
+            )}
 
-              {/*  */}
-            </Flex>
+            {/*  */}
           </Flex>
         </Flex>
 
@@ -97,7 +143,6 @@ const Home = () => {
           </Text>
         </Flex>
       </div>
-      <Analytics />
     </>
   );
 };

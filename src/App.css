@@ -26,6 +26,10 @@
   color: #8d8d8d;
 }
 
+.width {
+  max-width: 320px;
+}
+
 .between {
   display: flex;
   flex-direction: column;
@@ -53,4 +57,8 @@
   height: 80px;
   width: 80px;
   box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.07);
+}
+
+.mouse-hand {
+  cursor: pointer;
 }
