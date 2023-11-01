@@ -20,6 +20,8 @@ const Home = () => {
   const [hsl, setHsl] = useState("");
   const [preview, setPreview] = useState("");
   const [lightness, setLightness] = useState(0);
+  const [saturation, setSaturation] = useState(0);
+  const [hue, setHue] = useState(0);
   const [searchClicked, setSearchClicked] = useState(false);
 
   const openDerrickURL = () => {
@@ -37,13 +39,15 @@ const Home = () => {
           setColorData(response?.data);
           setHsl(
             response?.data?.hsl?.value
-              .replace("hsl(", "")
-              .replace(")", "")
-              .replace(" ", "")
-              .replace(" ", "")
+            // .replace("hsl(", "")
+            // .replace(")", "")
+            // .replace(" ", "")
+            // .replace(" ", "")
           );
           setPreview(response?.data?.image?.bare);
           setLightness(response?.data?.hsl?.l);
+          setHue(response?.data?.hsl?.h);
+          setSaturation(response?.data?.hsl?.s);
           // setSearchClicked(false);
         })
         .catch((err) => {
@@ -124,6 +128,8 @@ const Home = () => {
                 hsl={hsl}
                 colorInput={colorInput}
                 lightness={lightness}
+                saturation={saturation}
+                hue={hue}
               ></Result>
             ) : (
               <EmptyState></EmptyState>
