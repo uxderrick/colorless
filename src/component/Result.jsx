@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Flex, Text } from "@radix-ui/themes";
+import ColorProfile from "./ColorProfile";
 
-const Result = ({ colorData, hsl, colorInput, lightness }) => {
+const Result = ({ colorData, hsl, colorInput, lightness, hue, saturation }) => {
   // Initialize an empty array for shades and tints
   const shadesAndTints = [];
 
@@ -38,14 +39,19 @@ const Result = ({ colorData, hsl, colorInput, lightness }) => {
   };
 
   useEffect(() => {
-    console.log("Lightness", lightness);
     getTintsAndShades(lightness);
 
     // Sort the shadesAndTints array
     shadesAndTints.sort((a, b) => a - b);
 
     // Log the shadesAndTints array
-    console.log("Shades and Tints", shadesAndTints);
+    // console.log("Shades and Tints", shadesAndTints);
+    // console.log("H", hue);
+    // console.log("S", saturation);
+    // console.log("L", lightness);
+    // console.log("HSL", hsl);
+    // console.log(hue, saturation, lightness);
+    // console.log("Color Data", colorData);
   }, [lightness]);
 
   return (
@@ -56,18 +62,16 @@ const Result = ({ colorData, hsl, colorInput, lightness }) => {
       justify="center"
       py={{ sm: "3", md: "5", lg: "5" }}
     >
-      <Flex gap="2" direction="column">
-        <div
-          className="box"
-          style={{
-            backgroundImage: `url(https://via.placeholder.com/200x200/${colorInput})`,
-          }}
-        ></div>
-
-        <Text align="center" className="no-bg">
-          {colorData?.hex?.value}
-        </Text>
-      </Flex>
+      {/* Tints */}
+      <ColorProfile
+        shadesAndTints={shadesAndTints}
+        colorData={colorData}
+        hsl={hsl}
+        colorInput={colorInput}
+        lightness={lightness}
+        saturation={saturation}
+        hue={hue}
+      ></ColorProfile>
     </Flex>
   );
 };
