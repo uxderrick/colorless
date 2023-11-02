@@ -23,6 +23,7 @@ const Home = () => {
   const [saturation, setSaturation] = useState(0);
   const [hue, setHue] = useState(0);
   const [searchClicked, setSearchClicked] = useState(false);
+  const [errorCatcher, setErrorCatcher] = useState("");
 
   const openDerrickURL = () => {
     window.open("https://twitter.com/uxderrick");
@@ -36,6 +37,8 @@ const Home = () => {
       axios
         .get(`https://www.thecolorapi.com/id?hex=${colorInput}&format=json`)
         .then((response) => {
+          console.log(response?.data?.XYZ?.X);
+          setErrorCatcher(response?.data?.XYZ?.X);
           setColorData(response?.data);
           setHsl(
             response?.data?.hsl?.value
@@ -123,7 +126,10 @@ const Home = () => {
 
             {/* Result area */}
 
-            {colorData && searchClicked && colorInput.length > 2 ? (
+            {colorData &&
+            searchClicked &&
+            colorInput.length > 2 &&
+            errorCatcher != null ? (
               <Result
                 colorData={colorData}
                 hsl={hsl}
@@ -133,7 +139,7 @@ const Home = () => {
                 hue={hue}
               ></Result>
             ) : (
-              <EmptyState></EmptyState>
+              <EmptyState errorCatcher={errorCatcher}></EmptyState>
             )}
 
             {/*  */}
