@@ -6,7 +6,11 @@ const Error = () => {
     <>
       {/* Empty State */}
       <Flex direction="column" justify="center" align="center" gap="3" py="6">
-        <img src="src/assets/warning sign.png" alt="logo" height="80px" />
+        <img
+          src="https://github.com/uxderrick/colorless/blob/main/src/assets/warning%20sign.png?raw=true"
+          alt="logo"
+          height="80px"
+        />
         <Text align="center" className="grey-text width">
           Enter a correct color code. eg., #000000, #ffffff, #ff0000, #00ff00,
         </Text>
