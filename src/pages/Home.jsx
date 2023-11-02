@@ -110,6 +110,7 @@ const Home = () => {
                   style={{ width: "100%" }}
                   maxLength={6}
                   onChange={handleInputChange}
+                  onKeyDown={(e) => e.key === "Enter" && handleSearchClick()}
                 />
                 <TextField.Slot
                   className="mouse-hand"
