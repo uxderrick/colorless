@@ -48,7 +48,7 @@ const Home = () => {
           setLightness(response?.data?.hsl?.l);
           setHue(response?.data?.hsl?.h);
           setSaturation(response?.data?.hsl?.s);
-          // setSearchClicked(false);
+          setSearchClicked(true);
         })
         .catch((err) => {
           console.error("API request failed:", err);
@@ -57,7 +57,7 @@ const Home = () => {
   };
 
   const handleSearchClick = () => {
-    if (colorInput.length === 6) {
+    if (colorInput.length === 6 && searchClicked === false) {
       fetchData();
     }
   };
@@ -70,7 +70,7 @@ const Home = () => {
     // Reset the color data if the input is changed and Search hasn't been clicked
     if (searchClicked) {
       setColorData(null);
-    }
+    } else null;
   };
 
   //
@@ -122,7 +122,7 @@ const Home = () => {
 
             {/* Result area */}
 
-            {colorData && searchClicked ? (
+            {colorData && searchClicked && colorInput.length > 5 ? (
               <Result
                 colorData={colorData}
                 hsl={hsl}
