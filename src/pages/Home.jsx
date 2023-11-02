@@ -37,7 +37,7 @@ const Home = () => {
       axios
         .get(`https://www.thecolorapi.com/id?hex=${colorInput}&format=json`)
         .then((response) => {
-          console.log(response?.data?.XYZ?.X);
+          // console.log(response);
           setErrorCatcher(response?.data?.XYZ?.X);
           setColorData(response?.data);
           setHsl(

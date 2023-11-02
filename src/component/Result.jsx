@@ -43,15 +43,6 @@ const Result = ({ colorData, hsl, colorInput, lightness, hue, saturation }) => {
 
     // Sort the shadesAndTints array
     shadesAndTints.sort((a, b) => a - b);
-
-    // Log the shadesAndTints array
-    // console.log("Shades and Tints", shadesAndTints);
-    // console.log("H", hue);
-    // console.log("S", saturation);
-    // console.log("L", lightness);
-    // console.log("HSL", hsl);
-    // console.log(hue, saturation, lightness);
-    // console.log("Color Data", colorData);
   }, [lightness]);
 
   return (
@@ -66,7 +57,6 @@ const Result = ({ colorData, hsl, colorInput, lightness, hue, saturation }) => {
       <ColorProfile
         shadesAndTints={shadesAndTints}
         colorData={colorData}
-        hsl={hsl}
         colorInput={colorInput}
         lightness={lightness}
         saturation={saturation}
