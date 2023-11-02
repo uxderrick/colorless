@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Flex, Text } from "@radix-ui/themes";
+import { Flex, Separator, Text } from "@radix-ui/themes";
 import ColorProfile from "./ColorProfile";
+import YourColor from "./YourColor";
 
 const Result = ({ colorData, hsl, colorInput, lightness, hue, saturation }) => {
   // Initialize an empty array for shades and tints
@@ -13,8 +14,8 @@ const Result = ({ colorData, hsl, colorInput, lightness, hue, saturation }) => {
     // Calculate tints
     for (
       let i = lightness;
-      i <= 100 && uniqueTintsAndShades.length < 11;
-      i += 10
+      i <= 100 && uniqueTintsAndShades.length < 31;
+      i += 5
     ) {
       const value = i;
       uniqueTintsAndShades.push(value);
@@ -23,8 +24,8 @@ const Result = ({ colorData, hsl, colorInput, lightness, hue, saturation }) => {
     // Calculate shades
     for (
       let i = lightness;
-      i >= 0 && uniqueTintsAndShades.length < 11;
-      i -= 10
+      i >= 0 && uniqueTintsAndShades.length < 31;
+      i -= 5
     ) {
       const value = i;
       uniqueTintsAndShades.push(value);
@@ -46,23 +47,37 @@ const Result = ({ colorData, hsl, colorInput, lightness, hue, saturation }) => {
   }, [lightness]);
 
   return (
-    <Flex
-      direction="row"
-      wrap="wrap"
-      gap="5"
-      justify="center"
-      py={{ sm: "3", md: "5", lg: "5" }}
-    >
-      {/* Tints */}
-      <ColorProfile
-        shadesAndTints={shadesAndTints}
+    <>
+      {/* Your color */}
+      <YourColor
         colorData={colorData}
-        colorInput={colorInput}
         lightness={lightness}
         saturation={saturation}
         hue={hue}
-      ></ColorProfile>
-    </Flex>
+      ></YourColor>
+      <Separator
+        size="3"
+        orientation="horizontal"
+        className="separator width"
+      />
+      <Flex
+        direction="row"
+        wrap="wrap"
+        gap="5"
+        justify="center"
+        py={{ sm: "3", md: "5", lg: "5" }}
+      >
+        {/* Tints */}
+        <ColorProfile
+          shadesAndTints={shadesAndTints}
+          colorData={colorData}
+          colorInput={colorInput}
+          lightness={lightness}
+          saturation={saturation}
+          hue={hue}
+        ></ColorProfile>
+      </Flex>
+    </>
   );
 };
 
