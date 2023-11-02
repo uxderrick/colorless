@@ -46,9 +46,6 @@ const ColorProfile = ({
       </>
     );
   }
-
-  // If conditions are not met
-  return <div>No color profiles available</div>;
 };
 
 export default ColorProfile;
