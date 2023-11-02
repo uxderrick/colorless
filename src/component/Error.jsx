@@ -8,7 +8,7 @@ const Error = () => {
       <Flex direction="column" justify="center" align="center" gap="3" py="6">
         <img
           src="https://github.com/uxderrick/colorless/blob/main/src/assets/warning%20sign.png?raw=true"
-          alt="logo"
+          alt="error"
           height="80px"
         />
         <Text align="center" className="grey-text width">
