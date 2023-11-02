@@ -30,7 +30,7 @@ const Home = () => {
 
   // Get data from API
   const fetchData = async () => {
-    if (colorInput.length === 6) {
+    if (colorInput.length > 2) {
       setSearchClicked(true);
 
       axios
@@ -57,7 +57,7 @@ const Home = () => {
   };
 
   const handleSearchClick = () => {
-    if (colorInput.length === 6 && searchClicked === false) {
+    if (colorInput.length > 2 && searchClicked === false) {
       fetchData();
     }
   };
@@ -122,7 +122,7 @@ const Home = () => {
 
             {/* Result area */}
 
-            {colorData && searchClicked && colorInput.length > 5 ? (
+            {colorData && searchClicked && colorInput.length > 2 ? (
               <Result
                 colorData={colorData}
                 hsl={hsl}
