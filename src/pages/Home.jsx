@@ -77,6 +77,14 @@ const Home = () => {
     }
   };
 
+  const handleColorChange = (color) => {
+    const hexColor = color.hex;
+    setColorPickerColor(hexColor);
+    setColorInput(hexColor); // Update the colorInput state with the new color
+    setSearchClicked(false);
+    fetchData(); // Fetch data when color changes
+  };
+
   const handleInputChange = (e) => {
     const newValue = e.target.value
       .replace("#", "")
@@ -134,7 +142,7 @@ const Home = () => {
                   {/* Label */}
                   <TextField.Input
                     placeholder="Enter your color code"
-                    defaultValue={colorInput}
+                    value={colorInput} // Use value instead of defaultValue
                     style={{ width: "100%" }}
                     maxLength={6}
                     onChange={handleInputChange}
