@@ -139,7 +139,7 @@ const Home = () => {
                     placeholder="Enter your color code"
                     value={colorInput.toUpperCase()}
                     style={{ width: "100%" }}
-                    maxLength={6}
+                    maxLength={7}
                     onChange={handleInputChange}
                     onKeyDown={(e) => e.key === "Enter" && handleSearchClick()}
                   />
