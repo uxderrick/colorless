@@ -1,22 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Text,
   Flex,
   Box,
   TextField,
   TextFieldRoot,
-  TextFieldSlot,
+  Button,
+  Popover,
 } from "@radix-ui/themes";
 
-import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
+import {
+  MagnifyingGlassIcon,
+  ChatBubbleIcon,
+  Crosshair1Icon,
+} from "@radix-ui/react-icons";
 import "@radix-ui/themes/styles.css";
 import Result from "../component/Result";
 import EmptyState from "../component/EmptyState";
+import { SketchPicker } from "react-color";
 import axios from "axios";
 
 const Home = () => {
   const [colorData, setColorData] = useState(null);
-  const [colorInput, setColorInput] = useState("");
+  const [colorInput, setColorInput] = useState("".replace("#", ""));
   const [hsl, setHsl] = useState("");
   const [preview, setPreview] = useState("");
   const [lightness, setLightness] = useState(0);
@@ -24,9 +30,15 @@ const Home = () => {
   const [hue, setHue] = useState(0);
   const [searchClicked, setSearchClicked] = useState(false);
   const [errorCatcher, setErrorCatcher] = useState("");
+  const [colorPickerColor, setColorPickerColor] = useState("FFFFFF");
 
   const openDerrickURL = () => {
     window.open("https://twitter.com/uxderrick");
+  };
+
+  const refreshPage = () => {
+    window.open("https://colorless-ux.vercel.app/");
+    setColorInput("");
   };
 
   // Get data from API
@@ -66,9 +78,13 @@ const Home = () => {
   };
 
   const handleInputChange = (e) => {
-    const newValue = e.target.value.replace("#", "").replace(" ", "");
-    setColorInput(newValue);
+    const newValue = e.target.value
+      .replace("#", "")
+      .replace(" ", "")
+      .replace("#", "");
+    setColorInput(newValue.replace(" ", ""));
     setSearchClicked(false);
+    // console.log(colorInput);
 
     // Reset the color data if the input is changed and Search hasn't been clicked
     if (searchClicked) {
@@ -93,39 +109,96 @@ const Home = () => {
               <img
                 src="https://raw.githubusercontent.com/uxderrick/colorless/7adc4ec62eccd91aeddae753469b6327c26f46b9/src/assets/COLORLESS.svg"
                 alt="logo"
+                onClick={refreshPage}
+                className="mouse-hand"
               />
               <Text align="center">
                 Enter your color Hex code and get its tints and shades
               </Text>
             </Flex>
+
             <Flex
               direction="column"
-              style={{ maxWidth: 400 }}
+              style={{ maxWidth: 400, borderRadius: 10 }}
               align="center"
               className="input"
             >
               {/* Search field */}
-              <TextFieldRoot className="input">
-                {/* Label */}
-                <TextField.Input
-                  placeholder="Enter your color code"
-                  defaultValue={colorInput}
-                  style={{ width: "100%" }}
-                  maxLength={6}
-                  onChange={handleInputChange}
-                  onKeyDown={(e) => e.key === "Enter" && handleSearchClick()}
-                />
-                <TextField.Slot
-                  className="mouse-hand"
-                  onClick={handleSearchClick}
+              <Flex
+                direction="column"
+                style={{ maxWidth: 400 }}
+                align="center"
+                className="input"
+              >
+                <TextFieldRoot className="input">
+                  {/* Label */}
+                  <TextField.Input
+                    placeholder="Enter your color code"
+                    defaultValue={colorInput}
+                    style={{ width: "100%" }}
+                    maxLength={6}
+                    onChange={handleInputChange}
+                    onKeyDown={(e) => e.key === "Enter" && handleSearchClick()}
+                  />
+                  <TextField.Slot
+                    className="mouse-hand"
+                    onClick={handleSearchClick}
+                  >
+                    <MagnifyingGlassIcon height="16" width="16" />
+                  </TextField.Slot>
+                </TextFieldRoot>
+              </Flex>
+
+              {/* Color selector */}
+              <Popover.Root className="no-bg">
+                <Popover.Trigger className="no-bg">
+                  <Button
+                    variant="soft"
+                    size="1"
+                    // color="gray"
+                    className="no-bg colorless"
+                  >
+                    <Crosshair1Icon width="16" height="16" className="no-bg" />
+                    OR select from a color picker
+                  </Button>
+                </Popover.Trigger>
+                <Popover.Content
+                  align="center"
+                  style={{ width: 240 }}
+                  className="no-bg colorless"
                 >
-                  <MagnifyingGlassIcon height="16" width="16" />
-                </TextField.Slot>
-              </TextFieldRoot>
+                  <Flex gap="3" className="no-bg colorless" justify="center">
+                    <Flex className="no-bg center colorless">
+                      <SketchPicker
+                        color={colorPickerColor} // Use colorPickerColor as the initial color
+                        onChangeComplete={(color) => {
+                          setColorInput("");
+                          setColorPickerColor(color.hex.replace("#", ""));
+                          setColorInput(colorPickerColor); // Update colorInput with the selected color
+                          setSearchClicked(false);
+                          setColorData(null);
+                        }}
+                        className="no-bg"
+                        justify="center"
+                      />
+
+                      <Flex gap="3" mt="3" justify="center" className="no-bg">
+                        {/* <Flex align="center" gap="2" asChild className="no-bg">
+                          <Text as="label" size="2"></Text>
+                        </Flex> */}
+                        <Popover.Close className="no-bg">
+                          <Button size="1" onClick={handleSearchClick}>
+                            Submit
+                          </Button>
+                        </Popover.Close>
+                      </Flex>
+                    </Flex>
+                  </Flex>
+                </Popover.Content>
+              </Popover.Root>
             </Flex>
 
             {/* Result area */}
-
             {colorData &&
             searchClicked &&
             colorInput.length > 2 &&
