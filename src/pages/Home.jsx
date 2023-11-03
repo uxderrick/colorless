@@ -2,18 +2,13 @@ import React, { useState } from "react";
 import {
   Text,
   Flex,
-  Box,
   TextField,
   TextFieldRoot,
   Button,
   Popover,
 } from "@radix-ui/themes";
 
-import {
-  MagnifyingGlassIcon,
-  ChatBubbleIcon,
-  Crosshair1Icon,
-} from "@radix-ui/react-icons";
+import { MagnifyingGlassIcon, Crosshair1Icon } from "@radix-ui/react-icons";
 import "@radix-ui/themes/styles.css";
 import Result from "../component/Result";
 import EmptyState from "../component/EmptyState";
@@ -142,7 +137,7 @@ const Home = () => {
                   {/* Label */}
                   <TextField.Input
                     placeholder="Enter your color code"
-                    value={colorInput} // Use value instead of defaultValue
+                    value={colorInput}
                     style={{ width: "100%" }}
                     maxLength={6}
                     onChange={handleInputChange}
