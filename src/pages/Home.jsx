@@ -187,7 +187,11 @@ const Home = () => {
                           <Text as="label" size="2"></Text>
                         </Flex> */}
                         <Popover.Close className="no-bg">
-                          <Button size="1" onClick={handleSearchClick}>
+                          <Button
+                            size="2"
+                            onClick={handleSearchClick}
+                            style={{ width: 240 }}
+                          >
                             Submit
                           </Button>
                         </Popover.Close>
