@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Flex, Separator, Text } from "@radix-ui/themes";
+import React, { useEffect } from "react";
+import { Flex, Separator } from "@radix-ui/themes";
 import ColorProfile from "./ColorProfile";
 import YourColor from "./YourColor";
 
@@ -47,7 +47,7 @@ const Result = ({ colorData, hsl, colorInput, lightness, hue, saturation }) => {
   }, [lightness]);
 
   return (
-    <>
+    <Flex direction="column" align="center" gap="4" style={{ maxWidth: 1000 }}>
       {/* Your color */}
       <YourColor
         colorData={colorData}
@@ -77,7 +77,7 @@ const Result = ({ colorData, hsl, colorInput, lightness, hue, saturation }) => {
           hue={hue}
         ></ColorProfile>
       </Flex>
-    </>
+    </Flex>
   );
 };
 

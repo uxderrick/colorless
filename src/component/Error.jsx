@@ -12,7 +12,7 @@ const Error = () => {
           height="80px"
         />
         <Text align="center" className="grey-text width">
-          Enter a correct color code. eg., #000000, #ffffff, #ff0000, #00ff00,
+          Enter a correct color code. eg., 000000, ffffff, ff0000, 00ff00,
         </Text>
       </Flex>
     </>

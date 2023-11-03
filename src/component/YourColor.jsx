@@ -1,7 +1,7 @@
 import React from "react";
 import { Flex, Text } from "@radix-ui/themes";
 
-const YourColor = ({ colorData, lightness, hue, saturation }) => {
+const YourColor = ({ colorData }) => {
   if (colorData) {
     // Render color profiles using the map function
     return (
@@ -10,7 +10,6 @@ const YourColor = ({ colorData, lightness, hue, saturation }) => {
           <div
             className="box"
             style={{
-              //   backgroundColor: `hsl(${hue}, ${saturation}%, ${lightness}%)`,
               backgroundImage: `url(${colorData?.image?.named})`,
               backgroundSize: "cover",
               backgroundPosition: "center",

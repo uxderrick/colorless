@@ -4,7 +4,6 @@ import axios from "axios";
 
 const ColorProfile = ({
   colorData,
-  colorInput,
   lightness,
   hue,
   saturation,
