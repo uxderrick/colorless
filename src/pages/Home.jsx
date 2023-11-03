@@ -73,11 +73,11 @@ const Home = () => {
   };
 
   const handleColorChange = (color) => {
-    const hexColor = color.hex;
-    setColorPickerColor(hexColor);
-    setColorInput(hexColor); // Update the colorInput state with the new color
+    setColorPickerColor(color.hex.replace("#", ""));
+    setColorInput(color.hex.replace("#", ""));
     setSearchClicked(false);
-    fetchData(); // Fetch data when color changes
+    // console.log(color.hex.replace("#", ""));
+    // console.log(colorInput);
   };
 
   const handleInputChange = (e) => {
@@ -137,7 +137,7 @@ const Home = () => {
                   {/* Label */}
                   <TextField.Input
                     placeholder="Enter your color code"
-                    value={colorInput}
+                    value={colorInput.toUpperCase()}
                     style={{ width: "100%" }}
                     maxLength={6}
                     onChange={handleInputChange}
@@ -174,13 +174,7 @@ const Home = () => {
                     <Flex className="no-bg center colorless">
                       <SketchPicker
                         color={colorPickerColor} // Use colorPickerColor as the initial color
-                        onChangeComplete={(color) => {
-                          setColorInput("");
-                          setColorPickerColor(color.hex.replace("#", ""));
-                          setColorInput(colorPickerColor); // Update colorInput with the selected color
-                          setSearchClicked(false);
-                          setColorData(null);
-                        }}
+                        onChangeComplete={handleColorChange}
                         className="no-bg"
                         justify="center"
                       />
