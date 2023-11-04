@@ -8,6 +8,7 @@ import {
   Popover,
 } from "@radix-ui/themes";
 
+// Imports
 import { MagnifyingGlassIcon, Crosshair1Icon } from "@radix-ui/react-icons";
 import "@radix-ui/themes/styles.css";
 import Result from "../component/Result";
@@ -16,6 +17,7 @@ import { SketchPicker } from "react-color";
 import axios from "axios";
 
 const Home = () => {
+  // State variables
   const [colorData, setColorData] = useState(null);
   const [colorInput, setColorInput] = useState("".replace("#", ""));
   const [hsl, setHsl] = useState("");
@@ -174,20 +176,20 @@ const Home = () => {
                     <Flex className="no-bg center colorless">
                       <SketchPicker
                         color={colorPickerColor} // Use colorPickerColor as the initial color
-                        onChangeComplete={handleColorChange}
-                        className="no-bg"
+                        onChange={handleColorChange}
+                        className="no-bg color-picker-handle"
                         justify="center"
+                        width="240px"
+                        disableAlpha={true}
+                        renderers="canvas"
                       />
 
                       <Flex gap="3" mt="3" justify="center" className="no-bg">
-                        {/* <Flex align="center" gap="2" asChild className="no-bg">
-                          <Text as="label" size="2"></Text>
-                        </Flex> */}
                         <Popover.Close className="no-bg">
                           <Button
                             size="2"
                             onClick={handleSearchClick}
-                            style={{ width: 240 }}
+                            style={{ width: 260 }}
                           >
                             Submit
                           </Button>

@@ -74,10 +74,10 @@
 
 @media screen and (max-width: 600px) {
   .box {
-    border-radius: 5px;
+    /* border-radius: 5px; */
     height: 60px;
     width: 60px;
-    box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.07);
+    /* box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.07); */
   }
 
   .tintText {
@@ -87,9 +87,14 @@
 
 @media screen and (min-width: 600px) {
   .box {
-    border-radius: 5px;
+    /* border-radius: 5px; */
     height: 80px;
     width: 80px;
-    box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.07);
+    /* box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.07); */
   }
+}
+
+.color-picker-handle {
+  cursor: grab;
+  transition: transform 0.2s ease;
 }

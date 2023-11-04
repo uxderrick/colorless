@@ -63,7 +63,7 @@ const Result = ({ colorData, hsl, colorInput, lightness, hue, saturation }) => {
       <Flex
         direction="row"
         wrap="wrap"
-        gap="5"
+        gap=""
         justify="center"
         py={{ sm: "3", md: "5", lg: "5" }}
       >

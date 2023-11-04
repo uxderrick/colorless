@@ -53,7 +53,7 @@ const ColorProfile = ({
 
   // Create a rendering function for individual color profiles
   const renderColorProfile = (tintLightness, index) => (
-    <Flex gap="2" direction="column" key={index} className="width">
+    <Flex gap="1" direction="column" key={index} className="width">
       <div
         className="box"
         style={{
@@ -61,7 +61,12 @@ const ColorProfile = ({
         }}
       ></div>
 
-      <Text align="center" className="no-bg tintText">
+      <Text
+        align="center"
+        className="no-bg tintText"
+        size="1"
+        style={{ margin: "0px 0px 20px 0px" }}
+      >
         {tintColorData[tintLightness]}
       </Text>
     </Flex>
