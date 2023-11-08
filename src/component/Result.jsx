@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Flex, Separator } from "@radix-ui/themes";
+import { Flex, Separator, Text } from "@radix-ui/themes";
 import ColorProfile from "./ColorProfile";
 import YourColor from "./YourColor";
 
@@ -60,6 +60,10 @@ const Result = ({ colorData, hsl, colorInput, lightness, hue, saturation }) => {
         orientation="horizontal"
         className="separator width"
       />
+      <Text align="center" size="2">
+        (Click on the color to copy the hex code)
+      </Text>
+
       <Flex
         direction="row"
         wrap="wrap"
