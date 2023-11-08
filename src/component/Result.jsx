@@ -15,7 +15,7 @@ const Result = ({ colorData, hsl, colorInput, lightness, hue, saturation }) => {
     for (
       let i = lightness;
       i <= 100 && uniqueTintsAndShades.length < 31;
-      i += 2
+      i += 3
     ) {
       const value = i;
       uniqueTintsAndShades.push(value);
@@ -25,7 +25,7 @@ const Result = ({ colorData, hsl, colorInput, lightness, hue, saturation }) => {
     for (
       let i = lightness;
       i >= 0 && uniqueTintsAndShades.length < 31;
-      i -= 5
+      i -= 3
     ) {
       const value = i;
       uniqueTintsAndShades.push(value);
