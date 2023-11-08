@@ -68,12 +68,12 @@ const ColorProfile = ({
         setOpen(true);
       }}
     >
-      <div
+      <Flex
         className="box"
         style={{
           backgroundColor: `hsl(${hue}, ${saturation}%, ${tintLightness}%)`,
         }}
-      ></div>
+      ></Flex>
 
       <Text
         align="center"
