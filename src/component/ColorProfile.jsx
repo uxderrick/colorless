@@ -14,6 +14,7 @@ const ColorProfile = ({
   const [shadesAndTintsData, setShadesAndTintsData] = useState([]);
   const [tintColorData, setTintColorData] = useState({});
   const [open, setOpen] = React.useState(false);
+  const [copiedColor, setCopiedColor] = useState("");
 
   // Update the state variable when shadesAndTints prop changes
   useEffect(() => {
@@ -64,6 +65,7 @@ const ColorProfile = ({
       className="width"
       onClick={() => {
         navigator.clipboard.writeText(`${tintColorData[tintLightness]}`);
+        setCopiedColor(tintColorData[tintLightness]);
         setOpen(false);
         setOpen(true);
       }}
@@ -87,6 +89,8 @@ const ColorProfile = ({
   );
 
   if (colorData && shadesAndTintsData.length > 0) {
+    //define tintLightness
+
     // Render color profiles using the map function
     return (
       <>
@@ -102,7 +106,7 @@ const ColorProfile = ({
           >
             <Toast.Description className="no-bg">
               <Text className="no-bg" size="2">
-                Hex Code copied to clipboard!
+                {copiedColor} copied to clipboard!
               </Text>
             </Toast.Description>
           </Toast.Root>
