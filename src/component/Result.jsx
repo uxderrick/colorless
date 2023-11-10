@@ -49,12 +49,12 @@ const Result = ({ colorData, hsl, colorInput, lightness, hue, saturation }) => {
   return (
     <Flex direction="column" align="center" gap="4" style={{ maxWidth: 1000 }}>
       {/* Your color */}
-      <YourColor
+      {/* <YourColor
         colorData={colorData}
         lightness={lightness}
         saturation={saturation}
         hue={hue}
-      ></YourColor>
+      ></YourColor> */}
       <Separator
         size="3"
         orientation="horizontal"

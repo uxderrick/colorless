@@ -6,6 +6,8 @@ import {
   TextFieldRoot,
   Button,
   Popover,
+  Tabs,
+  Box,
 } from "@radix-ui/themes";
 
 // Imports
@@ -107,7 +109,7 @@ const Home = () => {
             direction="column"
             align="center"
             py="8"
-            gap="5"
+            gap="4"
             className="space"
           >
             <Flex direction="column" justify="center" align="center" gap="3">
@@ -118,7 +120,7 @@ const Home = () => {
                 className="mouse-hand"
               />
               <Text align="center">
-                Enter your color Hex code and get its tints and shades
+                Enter your color code and get its tints and shades
               </Text>
             </Flex>
 
@@ -128,31 +130,106 @@ const Home = () => {
               align="center"
               className="input"
             >
-              {/* Search field */}
-              <Flex
-                direction="column"
-                style={{ maxWidth: 400 }}
-                align="center"
-                className="input"
-              >
-                <TextFieldRoot className="input">
-                  {/* Label */}
-                  <TextField.Input
-                    placeholder="Enter your color code"
-                    value={colorInput.toUpperCase()}
-                    style={{ width: "100%" }}
-                    maxLength={7}
-                    onChange={handleInputChange}
-                    onKeyDown={(e) => e.key === "Enter" && handleSearchClick()}
-                  />
-                  <TextField.Slot
-                    className="mouse-hand"
-                    onClick={handleSearchClick}
-                  >
-                    <MagnifyingGlassIcon height="16" width="16" />
-                  </TextField.Slot>
-                </TextFieldRoot>
-              </Flex>
+              {/* Tabs */}
+              <Tabs.Root defaultValue="hex">
+                <Tabs.List>
+                  <Tabs.Trigger value="hex">HEX</Tabs.Trigger>
+                  <Tabs.Trigger value="hsl">HSL</Tabs.Trigger>
+                  <Tabs.Trigger value="rgb">RGB</Tabs.Trigger>
+                </Tabs.List>
+
+                <Box px="" pt="3" pb="2">
+                  <Tabs.Content value="hex">
+                    {/* HEX field */}
+                    <Flex
+                      direction="column"
+                      style={{ maxWidth: 400, minWidth: 320 }}
+                      align="center"
+                      className="input"
+                    >
+                      <TextFieldRoot className="input">
+                        {/* Label */}
+                        <TextField.Input
+                          placeholder="Enter your color code"
+                          value={colorInput.toUpperCase()}
+                          style={{ width: "100%" }}
+                          maxLength={7}
+                          onChange={handleInputChange}
+                          onKeyDown={(e) =>
+                            e.key === "Enter" && handleSearchClick()
+                          }
+                        />
+                        <TextField.Slot
+                          className="mouse-hand"
+                          onClick={handleSearchClick}
+                        >
+                          <MagnifyingGlassIcon height="16" width="16" />
+                        </TextField.Slot>
+                      </TextFieldRoot>
+                    </Flex>
+                  </Tabs.Content>
+
+                  <Tabs.Content value="hsl">
+                    {/* HSL field */}
+                    <Flex
+                      direction="column"
+                      style={{ maxWidth: 400, minWidth: 320 }}
+                      align="center"
+                      className="input"
+                    >
+                      <TextFieldRoot className="input">
+                        {/* Label */}
+                        <TextField.Input
+                          placeholder="Enter your color code"
+                          value={colorInput.toUpperCase()}
+                          style={{ width: "100%" }}
+                          maxLength={7}
+                          onChange={handleInputChange}
+                          onKeyDown={(e) =>
+                            e.key === "Enter" && handleSearchClick()
+                          }
+                        />
+                        <TextField.Slot
+                          className="mouse-hand"
+                          onClick={handleSearchClick}
+                        >
+                          <MagnifyingGlassIcon height="16" width="16" />
+                        </TextField.Slot>
+                      </TextFieldRoot>
+                    </Flex>
+                  </Tabs.Content>
+
+                  <Tabs.Content value="rgb">
+                    {/* RGB field */}
+                    <Flex
+                      direction="column"
+                      style={{ maxWidth: 400, minWidth: 320 }}
+                      align="center"
+                      className="input"
+                    >
+                      <TextFieldRoot className="input">
+                        {/* Label */}
+                        <TextField.Input
+                          placeholder="Enter your color code"
+                          value={colorInput.toUpperCase()}
+                          style={{ width: "100%" }}
+                          maxLength={7}
+                          onChange={handleInputChange}
+                          onKeyDown={(e) =>
+                            e.key === "Enter" && handleSearchClick()
+                          }
+                        />
+                        <TextField.Slot
+                          className="mouse-hand"
+                          onClick={handleSearchClick}
+                        >
+                          <MagnifyingGlassIcon height="16" width="16" />
+                        </TextField.Slot>
+                      </TextFieldRoot>
+                    </Flex>
+                  </Tabs.Content>
+                </Box>
+              </Tabs.Root>
 
               {/* Color selector */}
               <Popover.Root className="no-bg">
