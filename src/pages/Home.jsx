@@ -8,6 +8,7 @@ import {
   Popover,
   Tabs,
   Box,
+  Badge,
 } from "@radix-ui/themes";
 
 // Imports
@@ -134,8 +135,14 @@ const Home = () => {
               <Tabs.Root defaultValue="hex">
                 <Tabs.List>
                   <Tabs.Trigger value="hex">HEX</Tabs.Trigger>
-                  <Tabs.Trigger value="hsl">HSL</Tabs.Trigger>
-                  <Tabs.Trigger value="rgb">RGB</Tabs.Trigger>
+                  <Tabs.Trigger value="hsl" disabled>
+                    HSL
+                    <Badge color="green">Soon</Badge>
+                  </Tabs.Trigger>
+                  <Tabs.Trigger value="rgb" disabled>
+                    RGB
+                    <Badge color="green">Soon</Badge>
+                  </Tabs.Trigger>
                 </Tabs.List>
 
                 <Box px="" pt="3" pb="2">
