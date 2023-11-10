@@ -22,7 +22,7 @@
   width: 100%;
   border-radius: 5px;
   /* border: 1px solid #ccc; */
-  padding: 10px;
+  padding: 10px 10px;
   text-align: center;
   touch-action: "manipulation";
 }
@@ -77,6 +77,7 @@
     /* border-radius: 5px; */
     height: 60px;
     width: 60px;
+    cursor: pointer;
     /* box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.07); */
   }
 
@@ -90,6 +91,7 @@
     /* border-radius: 5px; */
     height: 80px;
     width: 80px;
+    cursor: pointer;
     /* box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.07); */
   }
 }
@@ -97,4 +99,142 @@
 .color-picker-handle {
   cursor: grab;
   transition: transform 0.2s ease;
+}
+
+.ToastViewport {
+  --viewport-padding: 25px;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  padding: var(--viewport-padding);
+  gap: 10px;
+  /* width: 390px; */
+  max-width: 100vw;
+  margin: 0;
+  list-style: none;
+  z-index: 2147483647;
+  outline: none;
+}
+
+.ToastRoot {
+  background-color: white;
+  border-radius: 6px;
+  box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px,
+    hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
+  padding: 15px;
+  display: grid;
+  grid-template-areas: "title action" "description action";
+  grid-template-columns: auto max-content;
+  column-gap: 15px;
+  align-items: center;
+}
+.ToastRoot[data-state="open"] {
+  animation: slideIn 150ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.ToastRoot[data-state="closed"] {
+  animation: hide 100ms ease-in;
+}
+.ToastRoot[data-swipe="move"] {
+  transform: translateX(var(--radix-toast-swipe-move-x));
+}
+.ToastRoot[data-swipe="cancel"] {
+  transform: translateX(0);
+  transition: transform 200ms ease-out;
+}
+.ToastRoot[data-swipe="end"] {
+  animation: swipeOut 100ms ease-out;
+}
+
+@keyframes hide {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(calc(100% + var(--viewport-padding)));
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes swipeOut {
+  from {
+    transform: translateX(var(--radix-toast-swipe-end-x));
+  }
+  to {
+    transform: translateX(calc(100% + var(--viewport-padding)));
+  }
+}
+
+.TabsRoot {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  box-shadow: 0 2px 10px var(--black-a4);
+}
+
+.TabsList {
+  flex-shrink: 0;
+  display: flex;
+  border-bottom: 1px solid var(--mauve-6);
+}
+
+.TabsTrigger {
+  font-family: inherit;
+  background-color: white;
+  padding: 0 20px;
+  height: 45px;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  line-height: 1;
+  color: var(--mauve-11);
+  user-select: none;
+}
+.TabsTrigger:first-child {
+  border-top-left-radius: 6px;
+}
+.TabsTrigger:last-child {
+  border-top-right-radius: 6px;
+}
+.TabsTrigger:hover {
+  color: var(--violet-11);
+}
+.TabsTrigger[data-state="active"] {
+  color: var(--violet-11);
+  box-shadow: inset 0 -1px 0 0 currentColor, 0 1px 0 0 currentColor;
+}
+.TabsTrigger:focus {
+  position: relative;
+  box-shadow: 0 0 0 2px black;
+}
+
+.TabsContent {
+  flex-grow: 1;
+  padding: 0px;
+  background-color: white;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  outline: none;
+}
+.TabsContent:focus {
+  box-shadow: 0 0 0 2px black;
+}
+
+.Text {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: var(--mauve-11);
+  font-size: 15px;
+  line-height: 1.5;
 }

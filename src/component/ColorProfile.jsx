@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { Flex, Text } from "@radix-ui/themes";
+import React, { useState, useEffect, useRef } from "react";
+import { Flex, Text, Button } from "@radix-ui/themes";
 import axios from "axios";
+import * as Toast from "@radix-ui/react-toast";
 
 const ColorProfile = ({
   colorData,
@@ -12,6 +13,8 @@ const ColorProfile = ({
   // State variable to store shadesAndTints
   const [shadesAndTintsData, setShadesAndTintsData] = useState([]);
   const [tintColorData, setTintColorData] = useState({});
+  const [open, setOpen] = React.useState(false);
+  const [copiedColor, setCopiedColor] = useState("");
 
   // Update the state variable when shadesAndTints prop changes
   useEffect(() => {
@@ -19,6 +22,8 @@ const ColorProfile = ({
       setShadesAndTintsData(shadesAndTints);
     }
   }, [shadesAndTints]);
+
+  //copy to clipboard toast
 
   // Fetch color data from API using hsl value
   const fetchColorData = async (tintLightness) => {
@@ -53,13 +58,24 @@ const ColorProfile = ({
 
   // Create a rendering function for individual color profiles
   const renderColorProfile = (tintLightness, index) => (
-    <Flex gap="1" direction="column" key={index} className="width">
-      <div
+    <Flex
+      gap="1"
+      direction="column"
+      key={index}
+      className="width"
+      onClick={() => {
+        navigator.clipboard.writeText(`${tintColorData[tintLightness]}`);
+        setCopiedColor(tintColorData[tintLightness]);
+        setOpen(false);
+        setOpen(true);
+      }}
+    >
+      <Flex
         className="box"
         style={{
           backgroundColor: `hsl(${hue}, ${saturation}%, ${tintLightness}%)`,
         }}
-      ></div>
+      ></Flex>
 
       <Text
         align="center"
@@ -73,12 +89,30 @@ const ColorProfile = ({
   );
 
   if (colorData && shadesAndTintsData.length > 0) {
+    //define tintLightness
+
     // Render color profiles using the map function
     return (
       <>
         {shadesAndTintsData.map((tintLightness, index) =>
           renderColorProfile(tintLightness, index)
         )}
+
+        <Toast.Provider swipeDirection="right">
+          <Toast.Root
+            className="ToastRoot no-bg"
+            open={open}
+            onOpenChange={setOpen}
+          >
+            <Toast.Description className="no-bg">
+              <Text className="no-bg" size="2">
+                {copiedColor} copied to clipboard!
+              </Text>
+            </Toast.Description>
+          </Toast.Root>
+
+          <Toast.Viewport className="ToastViewport no-bg" />
+        </Toast.Provider>
       </>
     );
   }

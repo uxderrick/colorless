@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Flex, Separator } from "@radix-ui/themes";
+import { Flex, Separator, Text } from "@radix-ui/themes";
 import ColorProfile from "./ColorProfile";
 import YourColor from "./YourColor";
 
@@ -14,8 +14,8 @@ const Result = ({ colorData, hsl, colorInput, lightness, hue, saturation }) => {
     // Calculate tints
     for (
       let i = lightness;
-      i <= 100 && uniqueTintsAndShades.length < 31;
-      i += 5
+      i <= 100 && uniqueTintsAndShades.length < 41;
+      i += 3
     ) {
       const value = i;
       uniqueTintsAndShades.push(value);
@@ -24,8 +24,8 @@ const Result = ({ colorData, hsl, colorInput, lightness, hue, saturation }) => {
     // Calculate shades
     for (
       let i = lightness;
-      i >= 0 && uniqueTintsAndShades.length < 31;
-      i -= 5
+      i >= 0 && uniqueTintsAndShades.length < 41;
+      i -= 3
     ) {
       const value = i;
       uniqueTintsAndShades.push(value);
@@ -49,17 +49,21 @@ const Result = ({ colorData, hsl, colorInput, lightness, hue, saturation }) => {
   return (
     <Flex direction="column" align="center" gap="4" style={{ maxWidth: 1000 }}>
       {/* Your color */}
-      <YourColor
+      {/* <YourColor
         colorData={colorData}
         lightness={lightness}
         saturation={saturation}
         hue={hue}
-      ></YourColor>
+      ></YourColor> */}
       <Separator
         size="3"
         orientation="horizontal"
         className="separator width"
       />
+      <Text align="center" size="2">
+        (Click on the color to copy the hex code)
+      </Text>
+
       <Flex
         direction="row"
         wrap="wrap"
