@@ -2,14 +2,14 @@ import { hexToHsva, hsvaToHslString, hslStringToHsva, hsvaToHex } from '@uiw/col
 
 /**
  * convert hex to hsl
- * @param {string} hex 
+ * @param {string} hex in either format `ffffff` or `#ffffff`
  * @return {{ h:number, s:number, l:number, value:string}}
  */
 export function hexToHsl(hex) {
     const hsva = hexToHsva(hex)
     const hslStr = hsvaToHslString(hsva)
 
-    // hslStr is in format hsl(342, 100%, 77%)
+    // hslStr is in format `hsl(h, s%, l%)`
     const match = hslStr.match(/^hsl\(([\d.]+), ([\d.]+)%, ([\d.]+)%\)$/);
     if (!match) {
         throw new Error(`Invalid HSL string: ${hslStr}`);
@@ -23,6 +23,11 @@ export function hexToHsl(hex) {
     };
 }
 
+/**
+ * 
+ * @param {string} hslString in format `hsl(h, s%, l%)`
+ * @returns {{ value:string }} in format `#ffffff`
+ */
 export function hslToHex(hslString) {
     const hsva = hslStringToHsva(hslString)
     const hex = hsvaToHex(hsva)
