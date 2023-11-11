@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Flex, Text, Button } from "@radix-ui/themes";
 import axios from "axios";
 import * as Toast from "@radix-ui/react-toast";
+import { hslToHex } from "../lib/Colorlib";
 
 const ColorProfile = ({
   colorData,
@@ -27,23 +28,14 @@ const ColorProfile = ({
 
   // Fetch color data from API using hsl value
   const fetchColorData = async (tintLightness) => {
-    const hsl = `${hue},${saturation}%,${tintLightness}%`;
+    const hslString = `hsl(${hue},${saturation}%,${tintLightness}%)`;
+    const hex = hslToHex(hslString);
 
     if (shadesAndTints && shadesAndTints.length > 0) {
-      axios
-        .get(
-          `https://www.thecolorapi.com/id?hsl=${hsl}&format=json&precision=1`
-        )
-        .then((response) => {
-          // Store the hex code in the tintColorData state object with lightness as the key
-          setTintColorData((prevData) => ({
-            ...prevData,
-            [tintLightness]: response?.data?.hex?.value,
-          }));
-        })
-        .catch((err) => {
-          console.error("API request failed:", err);
-        });
+      setTintColorData((prevData) => ({
+        ...prevData,
+        [tintLightness]: hex.value,
+      }));
     }
   };
 

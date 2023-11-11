@@ -23,3 +23,11 @@ export function hexToHsl(hex) {
     };
 }
 
+export function hslToHex(hslString) {
+    const hsva = hslStringToHsva(hslString)
+    const hex = hsvaToHex(hsva)
+
+    return {
+        value: hex
+    }
+}
