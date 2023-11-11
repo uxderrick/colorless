@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Flex, Text, Button } from "@radix-ui/themes";
-import axios from "axios";
 import * as Toast from "@radix-ui/react-toast";
 import { hslToHex } from "../lib/Colorlib";
 
