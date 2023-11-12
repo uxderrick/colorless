@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { Flex, Separator, Text } from "@radix-ui/themes";
 import ColorProfile from "./ColorProfile";
-import YourColor from "./YourColor";
 
 const Result = ({ colorData, hsl, colorInput, lightness, hue, saturation }) => {
   // Initialize an empty array for shades and tints

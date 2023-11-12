@@ -23,9 +23,7 @@ const ColorProfile = ({
     }
   }, [shadesAndTints]);
 
-  //copy to clipboard toast
-
-  // Fetch color data from API using hsl value
+  // Fetch color data from library using hsl value
   const fetchColorData = async (tintLightness) => {
     const hslString = `hsl(${hue},${saturation}%,${tintLightness}%)`;
     const hex = hslToHex(hslString);
@@ -56,7 +54,7 @@ const ColorProfile = ({
       className="width"
       onClick={() => {
         navigator.clipboard.writeText(`${tintColorData[tintLightness]}`);
-        setCopiedColor(tintColorData[tintLightness]);
+        setCopiedColor(tintColorData[tintLightness].toUpperCase());
         setOpen(false);
         setOpen(true);
       }}
@@ -74,7 +72,7 @@ const ColorProfile = ({
         size="1"
         style={{ margin: "0px 0px 20px 0px" }}
       >
-        {tintColorData[tintLightness]}
+        {tintColorData[tintLightness].toUpperCase()}
       </Text>
     </Flex>
   );
