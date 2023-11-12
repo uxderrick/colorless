@@ -17,14 +17,13 @@ import "@radix-ui/themes/styles.css";
 import Result from "../component/Result";
 import EmptyState from "../component/EmptyState";
 import { SketchPicker } from "react-color";
-import axios from "axios";
+import { hexToHsl } from "../lib/Colorlib";
 
 const Home = () => {
   // State variables
   const [colorData, setColorData] = useState(null);
   const [colorInput, setColorInput] = useState("".replace("#", ""));
   const [hsl, setHsl] = useState("");
-  const [preview, setPreview] = useState("");
   const [lightness, setLightness] = useState(0);
   const [saturation, setSaturation] = useState(0);
   const [hue, setHue] = useState(0);
@@ -46,28 +45,14 @@ const Home = () => {
     if (colorInput.length > 2) {
       setSearchClicked(true);
 
-      axios
-        .get(`https://www.thecolorapi.com/id?hex=${colorInput}&format=json`)
-        .then((response) => {
-          // console.log(response);
-          setErrorCatcher(response?.data?.XYZ?.X);
-          setColorData(response?.data);
-          setHsl(
-            response?.data?.hsl?.value
-            // .replace("hsl(", "")
-            // .replace(")", "")
-            // .replace(" ", "")
-            // .replace(" ", "")
-          );
-          setPreview(response?.data?.image?.bare);
-          setLightness(response?.data?.hsl?.l);
-          setHue(response?.data?.hsl?.h);
-          setSaturation(response?.data?.hsl?.s);
-          setSearchClicked(true);
-        })
-        .catch((err) => {
-          console.error("API request failed:", err);
-        });
+      const hsl = hexToHsl(colorInput);
+      setColorData(hsl);
+      setLightness(hsl.l);
+      setHue(hsl.h);
+      setSaturation(hsl.s);
+      setSearchClicked(true);
+      setErrorCatcher(hsl);
+      setHsl(hsl.value);
     }
   };
 
@@ -314,6 +299,22 @@ const Home = () => {
           <Text align="center" className="no-bg link" onClick={openDerrickURL}>
             UXDerrick
           </Text>
+          <img
+            src="https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png"
+            alt="github"
+            className="mouse-hand"
+            onClick={() =>
+              window.open("https://github.com/uxderrick/colorless")
+            }
+            height={40}
+            width={40}
+            style={{
+              position: "absolute",
+              bottom: 0,
+              right: 0,
+              clipPath: "circle(50%)",
+            }}
+          ></img>
         </Flex>
       </div>
     </>
