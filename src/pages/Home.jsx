@@ -45,16 +45,16 @@ const Home = () => {
     if (colorInput.length > 2) {
       setSearchClicked(true);
 
-			const hsl = hexToHsl(colorInput);
-			setColorData(hsl);
-			setLightness(hsl.l);
-			setHue(hsl.h);
-			setSaturation(hsl.s);
-			setSearchClicked(true);
-      setErrorCatcher(hsl)
-      setHsl(hsl.value)
-		}
-	};
+      const hsl = hexToHsl(colorInput);
+      setColorData(hsl);
+      setLightness(hsl.l);
+      setHue(hsl.h);
+      setSaturation(hsl.s);
+      setSearchClicked(true);
+      setErrorCatcher(hsl);
+      setHsl(hsl.value);
+    }
+  };
 
   const handleSearchClick = () => {
     if (colorInput.length > 2 && searchClicked === false) {
@@ -299,6 +299,22 @@ const Home = () => {
           <Text align="center" className="no-bg link" onClick={openDerrickURL}>
             UXDerrick
           </Text>
+          <img
+            src="https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png"
+            alt="github"
+            className="mouse-hand"
+            onClick={() =>
+              window.open("https://github.com/uxderrick/colorless")
+            }
+            height={40}
+            width={40}
+            style={{
+              position: "absolute",
+              bottom: 0,
+              right: 0,
+              clipPath: "circle(50%)",
+            }}
+          ></img>
         </Flex>
       </div>
     </>
