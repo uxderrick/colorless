@@ -72,7 +72,7 @@ const ColorProfile = ({
         size="1"
         style={{ margin: "0px 0px 20px 0px" }}
       >
-        {tintColorData[tintLightness].toUpperCase()}
+        {tintColorData[tintLightness]}
       </Text>
     </Flex>
   );
