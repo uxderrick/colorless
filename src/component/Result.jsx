@@ -59,7 +59,7 @@ const Result = ({ colorData, hsl, colorInput, lightness, hue, saturation }) => {
         orientation="horizontal"
         className="separator width"
       />
-      <Text align="center" size="2">
+      <Text align="center" size="1">
         (Click on the color to copy the hex code)
       </Text>
 

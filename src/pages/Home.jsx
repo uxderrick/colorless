@@ -30,6 +30,7 @@ const Home = () => {
   const [searchClicked, setSearchClicked] = useState(false);
   const [errorCatcher, setErrorCatcher] = useState("");
   const [colorPickerColor, setColorPickerColor] = useState("FFFFFF");
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
   // Get data from API
   const fetchData = () => {
@@ -52,6 +53,7 @@ const Home = () => {
     if (colorInput.length > 2 && searchClicked === false) {
       fetchData();
     }
+    setIsPopoverOpen(false);
   };
 
   const handleColorChange = (color) => {
@@ -143,7 +145,7 @@ const Home = () => {
                             maxLength={7}
                             onChange={handleInputChange}
                           />
-                          <button className="submit-btn">
+                          <button className="submit-btn mouse-hand">
                             <TextField.Slot>
                               <MagnifyingGlassIcon height="16" width="16" />
                             </TextField.Slot>
@@ -174,7 +176,7 @@ const Home = () => {
                             maxLength={7}
                             onChange={handleInputChange}
                           />
-                          <button className="submit-btn">
+                          <button className="submit-btn ">
                             <TextField.Slot>
                               <MagnifyingGlassIcon height="16" width="16" />
                             </TextField.Slot>
@@ -234,6 +236,7 @@ const Home = () => {
                   align="center"
                   style={{ width: 240 }}
                   className="no-bg colorless"
+                  open={isPopoverOpen}
                 >
                   <Flex gap="3" className="no-bg colorless" justify="center">
                     <Flex className="no-bg center colorless">
@@ -243,18 +246,39 @@ const Home = () => {
                         className="no-bg color-picker-handle"
                         justify="center"
                         width="240px"
-                        disableAlpha={true}
+                        disableAlpha
                         renderers="canvas"
                       />
 
-                      <Flex gap="3" mt="3" justify="center" className="no-bg">
+                      <Flex
+                        gap="3"
+                        mt="3"
+                        justify="center"
+                        className="no-bg"
+                        direction="column"
+                        align="center"
+                      >
                         <Popover.Close className="no-bg">
                           <Button
                             size="2"
-                            onClick={handleSearchClick}
+                            onClick={(e) => {
+                              handleSearchClick(e);
+                            }}
                             style={{ width: 260 }}
+                            className="no-bg"
                           >
                             Submit
+                          </Button>
+                        </Popover.Close>
+                        <Popover.Close className="no-bg">
+                          <Button
+                            size="2"
+                            onClick={() => setIsPopoverOpen(false)}
+                            style={{ width: 240 }}
+                            className="no-bg"
+                            variant="ghost"
+                          >
+                            Cancel
                           </Button>
                         </Popover.Close>
                       </Flex>
