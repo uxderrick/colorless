@@ -65,7 +65,7 @@ const ColorProfile = ({
           backgroundColor: `hsl(${hue}, ${saturation}%, ${tintLightness}%)`,
         }}
       ></Flex>
-
+ 
       <Text
         align="center"
         className="no-bg tintText"
