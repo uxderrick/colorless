@@ -30,18 +30,10 @@ const Home = () => {
   const [searchClicked, setSearchClicked] = useState(false);
   const [errorCatcher, setErrorCatcher] = useState("");
   const [colorPickerColor, setColorPickerColor] = useState("FFFFFF");
-
-  const openDerrickURL = () => {
-    window.open("https://twitter.com/uxderrick");
-  };
-
-  const refreshPage = () => {
-    window.open("https://colorless-ux.vercel.app/");
-    setColorInput("");
-  };
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
   // Get data from API
-  const fetchData = async () => {
+  const fetchData = () => {
     if (colorInput.length > 2) {
       setSearchClicked(true);
 
@@ -56,10 +48,12 @@ const Home = () => {
     }
   };
 
-  const handleSearchClick = () => {
+  const handleSearchClick = (e) => {
+    e.preventDefault();
     if (colorInput.length > 2 && searchClicked === false) {
       fetchData();
     }
+    setIsPopoverOpen(false);
   };
 
   const handleColorChange = (color) => {
@@ -77,12 +71,11 @@ const Home = () => {
       .replace("#", "");
     setColorInput(newValue.replace(" ", ""));
     setSearchClicked(false);
-    // console.log(colorInput);
 
     // Reset the color data if the input is changed and Search hasn't been clicked
     if (searchClicked) {
       setColorData(null);
-    } else null;
+    }
   };
 
   //
@@ -99,12 +92,12 @@ const Home = () => {
             className="space"
           >
             <Flex direction="column" justify="center" align="center" gap="3">
-              <img
-                src="https://raw.githubusercontent.com/uxderrick/colorless/7adc4ec62eccd91aeddae753469b6327c26f46b9/src/assets/COLORLESS.svg"
-                alt="logo"
-                onClick={refreshPage}
-                className="mouse-hand"
-              />
+              <a href="#">
+                <img
+                  src="https://raw.githubusercontent.com/uxderrick/colorless/7adc4ec62eccd91aeddae753469b6327c26f46b9/src/assets/COLORLESS.svg"
+                  alt="logo"
+                />
+              </a>
               <Text align="center">
                 Enter your color code and get its tints and shades
               </Text>
@@ -139,25 +132,26 @@ const Home = () => {
                       align="center"
                       className="input"
                     >
-                      <TextFieldRoot className="input">
-                        {/* Label */}
-                        <TextField.Input
-                          placeholder="Enter your color code"
-                          value={colorInput.toUpperCase()}
-                          style={{ width: "100%" }}
-                          maxLength={7}
-                          onChange={handleInputChange}
-                          onKeyDown={(e) =>
-                            e.key === "Enter" && handleSearchClick()
-                          }
-                        />
-                        <TextField.Slot
-                          className="mouse-hand"
-                          onClick={handleSearchClick}
-                        >
-                          <MagnifyingGlassIcon height="16" width="16" />
-                        </TextField.Slot>
-                      </TextFieldRoot>
+                      <form
+                        className="color-input-form"
+                        onSubmit={(e) => handleSearchClick(e)}
+                      >
+                        <TextFieldRoot className="input">
+                          {/* Label */}
+                          <TextField.Input
+                            placeholder="Enter your color code"
+                            value={colorInput.toUpperCase()}
+                            style={{ width: "100%" }}
+                            maxLength={7}
+                            onChange={handleInputChange}
+                          />
+                          <button className="submit-btn mouse-hand">
+                            <TextField.Slot>
+                              <MagnifyingGlassIcon height="16" width="16" />
+                            </TextField.Slot>
+                          </button>
+                        </TextFieldRoot>
+                      </form>
                     </Flex>
                   </Tabs.Content>
                   <Tabs.Content value="hsl">
@@ -168,25 +162,26 @@ const Home = () => {
                       align="center"
                       className="input"
                     >
-                      <TextFieldRoot className="input">
-                        {/* Label */}
-                        <TextField.Input
-                          placeholder="Enter your color code"
-                          value={colorInput.toUpperCase()}
-                          style={{ width: "100%" }}
-                          maxLength={7}
-                          onChange={handleInputChange}
-                          onKeyDown={(e) =>
-                            e.key === "Enter" && handleSearchClick()
-                          }
-                        />
-                        <TextField.Slot
-                          className="mouse-hand"
-                          onClick={handleSearchClick}
-                        >
-                          <MagnifyingGlassIcon height="16" width="16" />
-                        </TextField.Slot>
-                      </TextFieldRoot>
+                      <form
+                        className="color-input-form"
+                        onSubmit={(e) => handleSearchClick(e)}
+                      >
+                        <TextFieldRoot className="input">
+                          {/* Label */}
+                          <TextField.Input
+                            placeholder="Enter your color code"
+                            value={colorInput.toUpperCase()}
+                            style={{ width: "100%" }}
+                            maxLength={7}
+                            onChange={handleInputChange}
+                          />
+                          <button className="submit-btn ">
+                            <TextField.Slot>
+                              <MagnifyingGlassIcon height="16" width="16" />
+                            </TextField.Slot>
+                          </button>
+                        </TextFieldRoot>
+                      </form>
                     </Flex>
                   </Tabs.Content>
                   <Tabs.Content value="rgb">
@@ -197,25 +192,26 @@ const Home = () => {
                       align="center"
                       className="input"
                     >
-                      <TextFieldRoot className="input">
-                        {/* Label */}
-                        <TextField.Input
-                          placeholder="Enter your color code"
-                          value={colorInput.toUpperCase()}
-                          style={{ width: "100%" }}
-                          maxLength={7}
-                          onChange={handleInputChange}
-                          onKeyDown={(e) =>
-                            e.key === "Enter" && handleSearchClick()
-                          }
-                        />
-                        <TextField.Slot
-                          className="mouse-hand"
-                          onClick={handleSearchClick}
-                        >
-                          <MagnifyingGlassIcon height="16" width="16" />
-                        </TextField.Slot>
-                      </TextFieldRoot>
+                      <form
+                        className="color-input-form"
+                        onSubmit={(e) => handleSearchClick(e)}
+                      >
+                        <TextFieldRoot className="input">
+                          {/* Label */}
+                          <TextField.Input
+                            placeholder="Enter your color code"
+                            value={colorInput.toUpperCase()}
+                            style={{ width: "100%" }}
+                            maxLength={7}
+                            onChange={handleInputChange}
+                          />
+                          <button className="submit-btn">
+                            <TextField.Slot>
+                              <MagnifyingGlassIcon height="16" width="16" />
+                            </TextField.Slot>
+                          </button>
+                        </TextFieldRoot>
+                      </form>
                     </Flex>
                   </Tabs.Content>
                 </Box>
@@ -238,6 +234,7 @@ const Home = () => {
                   align="center"
                   style={{ width: 240 }}
                   className="no-bg colorless"
+                  open={isPopoverOpen}
                 >
                   <Flex gap="3" className="no-bg colorless" justify="center">
                     <Flex className="no-bg center colorless">
@@ -247,18 +244,39 @@ const Home = () => {
                         className="no-bg color-picker-handle"
                         justify="center"
                         width="240px"
-                        disableAlpha={true}
+                        disableAlpha
                         renderers="canvas"
                       />
 
-                      <Flex gap="3" mt="3" justify="center" className="no-bg">
+                      <Flex
+                        gap="3"
+                        mt="3"
+                        justify="center"
+                        className="no-bg"
+                        direction="column"
+                        align="center"
+                      >
                         <Popover.Close className="no-bg">
                           <Button
                             size="2"
-                            onClick={handleSearchClick}
+                            onClick={(e) => {
+                              handleSearchClick(e);
+                            }}
                             style={{ width: 260 }}
+                            className="no-bg"
                           >
                             Submit
+                          </Button>
+                        </Popover.Close>
+                        <Popover.Close className="no-bg">
+                          <Button
+                            size="2"
+                            onClick={() => setIsPopoverOpen(false)}
+                            style={{ width: 240 }}
+                            className="no-bg"
+                            variant="ghost"
+                          >
+                            Cancel
                           </Button>
                         </Popover.Close>
                       </Flex>
@@ -291,8 +309,8 @@ const Home = () => {
           <Text align="center" className="no-bg">
             Built by
           </Text>
-          <Text align="center" className="no-bg link" onClick={openDerrickURL}>
-            UXDerrick
+          <Text align="center" className="no-bg link">
+            <a href="https://twitter.com/uxderrick">UXDerrick</a>
           </Text>
           <img
             src="https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png"
