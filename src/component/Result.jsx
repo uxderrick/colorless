@@ -1,8 +1,13 @@
 import React, { useEffect } from "react";
-import { Flex, Separator, Text } from "@radix-ui/themes";
+import { Flex, Separator, Text, Button } from "@radix-ui/themes";
+import { Share1Icon } from "@radix-ui/react-icons";
 import ColorProfile from "./ColorProfile";
 
 const Result = ({ colorData, hsl, colorInput, lightness, hue, saturation }) => {
+  const handleFigmaShare = () => {
+    //...
+  };
+
   // Initialize an empty array for shades and tints
   const shadesAndTints = [];
 
@@ -59,10 +64,6 @@ const Result = ({ colorData, hsl, colorInput, lightness, hue, saturation }) => {
         orientation="horizontal"
         className="separator width"
       />
-      <Text align="center" size="1">
-        (Click on the color to copy the hex code)
-      </Text>
-
       <Flex
         direction="row"
         wrap="wrap"
@@ -80,6 +81,10 @@ const Result = ({ colorData, hsl, colorInput, lightness, hue, saturation }) => {
           hue={hue}
         ></ColorProfile>
       </Flex>
+      <Button onClick={handleFigmaShare}>
+        <Share1Icon className="no-bg" />
+        Copy and Paste in Figma
+      </Button>
     </Flex>
   );
 };

@@ -154,7 +154,6 @@ const Home = () => {
                       </form>
                     </Flex>
                   </Tabs.Content>
-
                   <Tabs.Content value="hsl">
                     {/* HSL field */}
                     <Flex
@@ -185,7 +184,6 @@ const Home = () => {
                       </form>
                     </Flex>
                   </Tabs.Content>
-
                   <Tabs.Content value="rgb">
                     {/* RGB field */}
                     <Flex
@@ -304,11 +302,8 @@ const Home = () => {
             ) : (
               <EmptyState errorCatcher={errorCatcher}></EmptyState>
             )}
-
-            {/*  */}
           </Flex>
         </Flex>
-
         {/* Footer */}
         <Flex justify="center" align="center" gap="1" className="fixed-bottom">
           <Text align="center" className="no-bg">
